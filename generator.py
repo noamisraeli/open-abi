@@ -54,7 +54,7 @@ def generate_function_definitions(function_data_model: FunctionAttribute):
     return f"""def {function_name}({function_signature}):\n\tpass # Implementation needed!"""
 
 if __name__ == '__main__': 
-    with open('examples/test.json', 'r') as f:
+    with open('examples/ECR20.json', 'r') as f:
         contract_description = json.load(f)
     
     contract_events_models = [EventAttribute.parse_obj(i) for i in contract_description if i['type'] == 'event']
