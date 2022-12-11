@@ -1,8 +1,8 @@
 import json
 
-from openabi.contract_model import EventAttribute, FunctionAttribute
-from openabi.utils import update_each_non_empty_line
-from openabi.python_generator import generate_event_models, generate_class_function_implementation
+from .contract_model import EventAttribute, FunctionAttribute
+from .utils import update_each_non_empty_line
+from .python_generator import generate_event_models, generate_class_function_implementation
 
 def generate(contract_name: str, contract_abi_string: str):
     # TODO:
@@ -40,7 +40,7 @@ def generate(contract_name: str, contract_abi_string: str):
 
         for i in contract_function_models:
             function_string = generate_class_function_implementation(i, ['self'])
-            function_string = update_each_non_empty_line(function_string, '\t\t')
+            function_string = update_each_non_empty_line(function_string, prefix='\t')
             f.write(function_string)
     
     #TODO: Run configured linting after generating code

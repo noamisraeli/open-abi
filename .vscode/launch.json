@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "tests/test_sanity.py",
             "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/openabi",
             "env": {"PYTHONPATH": "${cwd}"
             }
         },
@@ -18,10 +18,7 @@
             "name": "Python: generate client",
             "type": "python",
             "request": "launch",
-            "program": "generator.py",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}",
-            "env": {"PYTHONPATH": "${cwd}"}
+            "module": "openabi.generator"
         }
     ]
 }

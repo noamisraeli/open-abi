@@ -2,6 +2,7 @@ import typing
 
 import pydantic
 
+
 SolidityType = typing.Literal[
     'uint256',
     'uint8',
