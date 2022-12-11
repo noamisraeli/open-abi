@@ -86,12 +86,15 @@ def generate_class_function_implementation(function_data_model: FunctionAttribut
 
     # Generate the function body
     implementation += f"\t\tresult = self._contract_api.functions.{function_name}({', '.join(args)}).call()\n\n"
-
+    implementation += f"\t\t#TODO: use the eth.call method instead of the mockypatched web3py api\n"
     implementation += "\t\treturn result\n"
 
     return implementation 
 
 def generate(contract_name: str, contract_abi_string: str):
+    # TODO:
+    # 1. Use linters for all spaces in between imports and stuff (remove CLASS SEPERATOR)
+    # 2. Use padantic.BaseModel instead of typed dict and validate the output of a function with it.
     
     contract_description = json.loads(contract_abi_string)
     contract_events_models = [EventAttribute.parse_obj(i) for i in contract_description if i['type'] == 'event']

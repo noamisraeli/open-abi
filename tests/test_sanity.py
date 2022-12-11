@@ -17,4 +17,5 @@ if __name__ == '__main__':
 
     client = ECR20Client(address=contract_account, w3_provider=w3)
     client.init()
-    print(client.balance_of(user_account))
+    balance = client.balance_of('0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45')
+    print(balance['balance'])

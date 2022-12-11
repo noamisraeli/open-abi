@@ -233,46 +233,55 @@ class ECR20Client(ContractClient):
 	def name(self) -> str:
 		result = self._contract_api.functions.name().call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def approve(self, _spender: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _value: int) -> bool:
 		result = self._contract_api.functions.approve(_spender, _value).call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def total_supply(self) -> int:
 		result = self._contract_api.functions.totalSupply().call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def transfer_from(self, _from: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _to: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _value: int) -> bool:
 		result = self._contract_api.functions.transferFrom(_from, _to, _value).call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def decimals(self) -> int:
 		result = self._contract_api.functions.decimals().call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	balanceOf_output = typing.TypedDict("balanceOf_output", balance=int)
 	def balance_of(self, _owner: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$')) -> balanceOf_output:
 		result = self._contract_api.functions.balanceOf(_owner).call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def symbol(self) -> str:
 		result = self._contract_api.functions.symbol().call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def transfer(self, _to: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _value: int) -> bool:
 		result = self._contract_api.functions.transfer(_to, _value).call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
 	def allowance(self, _owner: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _spender: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$')) -> int:
 		result = self._contract_api.functions.allowance(_owner, _spender).call()
 
+		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 
