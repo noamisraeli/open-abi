@@ -11,11 +11,11 @@ SolidityType = typing.Literal[
     'bool'
 ]
 
-StateMutabilityType = typing.Union[
-    typing.Literal['nonpayable'],
-    typing.Literal['pure'],
-    typing.Literal['view'],
-    typing.Literal['payable']
+StateMutabilityType = typing.Literal[
+    'nonpayable',
+    'pure',
+    'view',
+    'payable'
 ]
 
 class Attribute(pydantic.BaseModel):
@@ -60,15 +60,3 @@ class FallbackFunctionAttribute(pydantic.BaseModel):
     type: typing.Literal['fallback']
     stateMutability: StateMutabilityType
     payable: bool
-
-
-class ContractDescription(pydantic.BaseModel):
-    __root__: typing.List[
-        typing.Union[
-            FunctionAttribute,
-            EventAttribute, 
-            FallbackFunctionAttribute,
-            ConstructorAttribute
-            ]
-        ]
-
