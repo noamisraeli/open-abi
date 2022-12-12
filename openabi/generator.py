@@ -1,8 +1,8 @@
 import json
 
-from .contract_model import EventAttribute, FunctionAttribute
-from .utils import update_each_non_empty_line
-from .python_generator import generate_event_models, generate_class_function_implementation
+from openabi.contract_model import EventAttribute, FunctionAttribute
+from openabi.utils import update_each_non_empty_line
+from openabi.python.python_generator import generate_event_models, generate_class_function_implementation
 
 def generate(contract_name: str, contract_abi_string: str):
     # TODO:
@@ -34,7 +34,7 @@ def generate(contract_name: str, contract_abi_string: str):
         if len(contract_function_models) > 0:
             f.write('import pydantic\n\n')
             f.write('import typing\n\n')
-            f.write('from openabi.contract_client import ContractClient\n\n\n')
+            f.write('from openabi.python.contract_client import ContractClient\n\n\n')
             f.write(f'class {contract_name}Client(ContractClient):\n')
             f.write(f'\tABI = """{contract_abi_string}"""\n')
 

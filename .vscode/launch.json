@@ -4,15 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
-            "name": "Python: run tests",
+            "name": "Python: tests",
             "type": "python",
             "request": "launch",
-            "program": "tests/test_sanity.py",
-            "console": "integratedTerminal",
-            "cwd": "${workspaceFolder}/openabi",
-            "env": {"PYTHONPATH": "${cwd}"
-            }
+            "module": "tests.test_sanity"
         },
         {
             "name": "Python: generate client",
