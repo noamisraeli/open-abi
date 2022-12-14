@@ -81,8 +81,7 @@ def generate_class_function_implementation(function_data_model: FunctionAttribut
 
     implementation += f"\tfunction_abi_signature = '{get_function_abi_signature(function_data_model=function_data_model)}'\n"
     # Generate the function body
-    implementation += f"\tresult = self.make_call(function_abi_signature, [{', '.join(args)}])\n\n"
-    implementation += f"\t#TODO: use the eth.call method instead of the mockypatched web3py api\n"
+    implementation += f"\tresult = self.api.make_call(self._address, function_abi_signature, [{', '.join(args)}])\n\n"
     
     if return_type is not None and return_type_class_string != '':
         implementation += f"\treturn self.{return_type}(result)\n"

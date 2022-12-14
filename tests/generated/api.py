@@ -232,57 +232,48 @@ class ECR20Client(ContractClient):
 ]"""
 	def name(self) -> str:
 		function_abi_signature = 'name()'
-		result = self.make_call(function_abi_signature, [])
+		result = self.api.make_call(self._address, function_abi_signature, [])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	def approve(self, _spender: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _value: int) -> bool:
 		function_abi_signature = 'approve(address,uint256)'
-		result = self.make_call(function_abi_signature, [_spender, _value])
+		result = self.api.make_call(self._address, function_abi_signature, [_spender, _value])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	def total_supply(self) -> int:
 		function_abi_signature = 'totalSupply()'
-		result = self.make_call(function_abi_signature, [])
+		result = self.api.make_call(self._address, function_abi_signature, [])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	def transfer_from(self, _from: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _to: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _value: int) -> bool:
 		function_abi_signature = 'transferFrom(address,address,uint256)'
-		result = self.make_call(function_abi_signature, [_from, _to, _value])
+		result = self.api.make_call(self._address, function_abi_signature, [_from, _to, _value])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	def decimals(self) -> int:
 		function_abi_signature = 'decimals()'
-		result = self.make_call(function_abi_signature, [])
+		result = self.api.make_call(self._address, function_abi_signature, [])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	class balanceOf_output(pydantic.BaseModel):
 		balance: int
 	def balance_of(self, _owner: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$')) -> balanceOf_output:
 		function_abi_signature = 'balanceOf(address)'
-		result = self.make_call(function_abi_signature, [_owner])
+		result = self.api.make_call(self._address, function_abi_signature, [_owner])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return self.balanceOf_output(result)
 	def symbol(self) -> str:
 		function_abi_signature = 'symbol()'
-		result = self.make_call(function_abi_signature, [])
+		result = self.api.make_call(self._address, function_abi_signature, [])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	def transfer(self, _to: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _value: int) -> bool:
 		function_abi_signature = 'transfer(address,uint256)'
-		result = self.make_call(function_abi_signature, [_to, _value])
+		result = self.api.make_call(self._address, function_abi_signature, [_to, _value])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result
 	def allowance(self, _owner: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$'), _spender: pydantic.constr(regex=r'^0x[0-9a-fA-F]{40}$')) -> int:
 		function_abi_signature = 'allowance(address,address)'
-		result = self.make_call(function_abi_signature, [_owner, _spender])
+		result = self.api.make_call(self._address, function_abi_signature, [_owner, _spender])
 
-		#TODO: use the eth.call method instead of the mockypatched web3py api
 		return result

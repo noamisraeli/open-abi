@@ -1,18 +1,22 @@
 import json
+import os
 
 from openabi.contract_model import EventAttribute, FunctionAttribute
 from openabi.utils import update_each_non_empty_line
 from openabi.python.python_generator import generate_event_models, generate_class_function_implementation
 
-def generate(contract_name: str, contract_abi_string: str):
+def generate(contract_name: str, contract_abi_string: str, output_dir: str = 'generated'):
     # TODO:
     # 1. Use linters for all spaces in between imports and stuff (remove CLASS SEPERATOR)
     # 2. Use padantic.BaseModel instead of typed dict and validate the output of a function with it.
     
     contract_description = json.loads(contract_abi_string)
     contract_events_models = [EventAttribute.parse_obj(i) for i in contract_description if i['type'] == 'event']
-
-    with open('generated/events.py', 'w') as f:
+    
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    with open(os.path.join(output_dir, 'events.py'), 'w') as f:
         f.truncate()
 
         if len(contract_events_models) > 0:
@@ -26,7 +30,7 @@ def generate(contract_name: str, contract_abi_string: str):
 
     contract_function_models = [FunctionAttribute.parse_obj(i) for i in contract_description if i['type'] == 'function']
     
-    with open('generated/api.py', 'w') as f:
+    with open(os.path.join(output_dir, 'api.py'), 'w') as f:
         f.truncate()
         
         f.write('# This file is generated using the Etheruem API generator.\n# the file contains the basic functions for interacting with ethereum contract.\n')
