@@ -1,7 +1,7 @@
 import typing
 
-from .contract_model import EventAttribute, FunctionAttribute, SolidityType, Argument
-from .utils import camel_to_snake, update_each_non_empty_line
+from ..contract_model import EventAttribute, FunctionAttribute, SolidityType, Argument
+from ..utils import camel_to_snake, update_each_non_empty_line
 
 
 SOLIDITY_TO_PYTHON_MAPPING = {
@@ -14,6 +14,9 @@ SOLIDITY_TO_PYTHON_MAPPING = {
 }
 
 ATTRIBUTE_SEPERATOR = "\n\t"
+
+def get_function_abi_signature(function_data_model: FunctionAttribute):
+    return f"{function_data_model.name}({','.join([input.type for input in function_data_model.inputs])})"
 
 def convert_to_python_type(solidity_type: SolidityType):
     python_type_string =  SOLIDITY_TO_PYTHON_MAPPING.get(solidity_type)
@@ -51,6 +54,7 @@ def generate_class_function_implementation(function_data_model: FunctionAttribut
     # Extract the function's name and arguments from the ABI
     function_name = function_data_model.name
     base_signature_arguments = prefix_arguments or []
+
     base_signature_arguments.extend(f"{input.name}: {convert_to_python_type(input.type)}" for input in function_data_model.inputs)
     function_signature = ", ".join(base_signature_arguments)
     args = [input.name for input in function_data_model.inputs]
@@ -75,9 +79,9 @@ def generate_class_function_implementation(function_data_model: FunctionAttribut
     # Generate the function signature
     implementation += f"def {convert_to_python_code_style(function_name)}({function_signature}) -> {return_type}:\n"
 
+    implementation += f"\tfunction_abi_signature = '{get_function_abi_signature(function_data_model=function_data_model)}'\n"
     # Generate the function body
-    implementation += f"\tresult = self._contract_api.functions.{function_name}({', '.join(args)}).call()\n\n"
-    implementation += f"\t#TODO: use the eth.call method instead of the mockypatched web3py api\n"
+    implementation += f"\tresult = self.api.make_call(self._address, function_abi_signature, [{', '.join(args)}])\n\n"
     
     if return_type is not None and return_type_class_string != '':
         implementation += f"\treturn self.{return_type}(result)\n"
